@@ -15,6 +15,8 @@
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
               gcc
+              rust.packages.stable.cargo
+              rust.packages.stable.rustc
             ];
           };
         }
