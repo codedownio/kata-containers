@@ -796,9 +796,11 @@ BUILDTAGS :=
 # go build common flags
 BUILDFLAGS := -buildmode=pie -mod=vendor ${BUILDTAGS}
 
+KATA_LDFLAGS := -extldflags=-static
+
 # whether stipping the binary
 ifeq ($(STRIP),yes)
-       KATA_LDFLAGS = -w -s
+       KATA_LDFLAGS += -w -s
 endif
 
 ifeq ($(ARCH),s390x)

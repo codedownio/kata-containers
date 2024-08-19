@@ -17,6 +17,7 @@
               gcc
               rust.packages.stable.cargo
               rust.packages.stable.rustc
+              pkgsMusl.musl
             ];
           };
         }
