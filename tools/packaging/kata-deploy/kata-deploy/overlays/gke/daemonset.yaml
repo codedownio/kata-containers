@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kata-deploy
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      containers:
+      - name: kube-kata
+        env:
+        - name: DEBUG
+          value: "true"
+        - name: INSTALLATION_PREFIX
+          value: /var/lib/google/kata
+        - name: SHIMS
+          value: clh cloud-hypervisor
+
+      volumes:
+      # Path to containerd config.toml file
+      - name: containerd-conf
+        hostPath:
+          path: /etc/containerd
+
+      # We can't use /opt/kata on Container-Optimized OS
+      - name: kata-artifacts
+        hostPath:
+          path: /var/lib/google/kata
+          type: DirectoryOrCreate
